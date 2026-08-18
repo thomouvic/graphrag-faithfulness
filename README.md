@@ -1,12 +1,19 @@
 # Faithfulness probes for small-model Graph-RAG
 
-This repository holds the experiment scripts for a study of *faithfulness and
-calibration* failures in small (8B) language models used for graph-structured
-retrieval-augmented question answering. The probes diagnose where the small-model
-accuracy gap comes from (parametric leakage, retrieval recall, or failure to use
-retrieved evidence) and test grounding + calibrated re-asking as a recovery
-mechanism, across the HotpotQA, MuSiQue, and 2WikiMultiHopQA multi-hop
-benchmarks.
+Experiment scripts for the paper
+
+> Jason Thomo, Venkatesh Srinivasan, and Alex Thomo. **The Small-Model Graph-RAG
+> Gap Is a Faithfulness Gap.** In *Proceedings of the 35th ACM International
+> Conference on Information and Knowledge Management (CIKM '26)*, November 2026,
+> Rome, Italy. https://doi.org/10.1145/3799682.3839910
+
+The paper studies *faithfulness and calibration* failures in small (8B) language
+models used for graph-structured retrieval-augmented question answering. The
+probes here diagnose where the small-model accuracy gap comes from (parametric
+leakage, retrieval recall, or failure to use retrieved evidence) and test
+grounding + calibrated re-asking as a recovery mechanism, on the HotpotQA and
+MuSiQue multi-hop benchmarks over KET-RAG and LightRAG retrieval (with
+2WikiMultiHopQA supported by the scripts as well).
 
 The scripts in `probe/` are the analysis and run harness only. They do **not**
 vendor the benchmark data or the base QA pipeline; both are provided by the prior
@@ -14,8 +21,10 @@ work this study builds on (see Prerequisites).
 
 ## Prerequisites
 
-1. **Paper 1 base repository (arXiv 2603.14045).** The core scripts import the
-   prior work's `qa_pipeline` module (prompt construction + answer evaluation),
+1. **Paper 1 base repository:
+   [thomouvic/graph-rag-qa-pub](https://github.com/thomouvic/graph-rag-qa-pub)**
+   (Zarrinkia, Srinivasan, Thomo, *The Reasoning Bottleneck in Graph-RAG*,
+   arXiv 2603.14045). The core scripts import that repository's `qa_pipeline` module (prompt construction + answer evaluation),
    read its `.env`, and load its benchmark data, SPARQL-CoT result CSVs, and
    supporting-fact coverage files. Clone that repository and point the
    `PAPER1_REPO` environment variable at its root (see Environment variables).
@@ -102,3 +111,21 @@ the closed-book, few-shot, self-consistency, and structure analyses):
 - Reproducing the full study requires the Paper 1 base repo's benchmark data and
   result CSVs in addition to the API keys above; the scripts here do not bundle
   that data.
+
+## Citation
+
+```bibtex
+@inproceedings{thomo2026faithfulness,
+  author    = {Jason Thomo and Venkatesh Srinivasan and Alex Thomo},
+  title     = {The Small-Model Graph-RAG Gap Is a Faithfulness Gap},
+  booktitle = {Proceedings of the 35th ACM International Conference on Information and Knowledge Management (CIKM '26)},
+  year      = {2026},
+  publisher = {ACM},
+  address   = {Rome, Italy},
+  doi       = {10.1145/3799682.3839910}
+}
+```
+
+## License
+
+MIT, see [LICENSE](LICENSE).
